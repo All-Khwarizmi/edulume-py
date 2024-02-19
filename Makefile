@@ -26,18 +26,18 @@ help:
 
 # Create the conda environment
 conda-env:
-	conda env create -f environment.yml
+	conda create -y -n edulume python=3.10
+	conda activate edulume
 
 # Create the requirements.txt file
 requirements:
 	conda list --export > requirements.txt
 
-# Run the tests
-test:
-	pytest 
-
-
 # Build 
-build: requirements
-	pip install -r requirements.txt
+build: conda-env requirements
+	conda install --file requirements.txt
+
+# Run the tests
+test: 
+	pytest 
 	
